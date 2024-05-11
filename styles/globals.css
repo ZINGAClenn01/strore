@@ -105,3 +105,23 @@ a {
     color-scheme: dark;
   }
 }
+
+
+.bouton{
+  margin-top: 2%;
+}
+
+
+.card{
+  margin-top: 7%;
+  margin-left: 2%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+.Card2{
+ margin: auto; 
+}
