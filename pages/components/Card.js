@@ -28,9 +28,8 @@ export default function MediaCard() {
                             </Typography>
                         </CardContent>
                         <CardActions>
-                            <Button size="small">Uptdate</Button>
-                            <Button size="small">Clear </Button>
-                            <Button size="small">Learn </Button>
+                        <Button size="small">Modifier</Button>
+                            <Button size="small">Supprimer </Button>
                         </CardActions>
                     </Card>
                 </div>
@@ -51,9 +50,8 @@ export default function MediaCard() {
                             </Typography>
                         </CardContent>
                         <CardActions>
-                            <Button size="small">Uptdate</Button>
-                            <Button size="small">Clear </Button>
-                            <Button size="small">Learn </Button>
+                        <Button size="small">Modifier</Button>
+                            <Button size="small">Supprimer </Button>
                         </CardActions>
                     </Card>
                 </div>
@@ -74,9 +72,8 @@ export default function MediaCard() {
                             </Typography>
                         </CardContent>
                         <CardActions>
-                            <Button size="small">Uptdate</Button>
-                            <Button size="small">Clear </Button>
-                            <Button size="small">Learn </Button>
+                        <Button size="small">Modifier</Button>
+                            <Button size="small">Supprimer </Button>
                         </CardActions>
                     </Card>
                 </div>
@@ -99,9 +96,8 @@ export default function MediaCard() {
                             </Typography>
                         </CardContent>
                         <CardActions>
-                            <Button size="small">Uptdate</Button>
-                            <Button size="small">Clear </Button>
-                            <Button size="small">Learn </Button>
+                        <Button size="small">Modifier</Button>
+                            <Button size="small">Supprimer </Button>
                         </CardActions>
                     </Card>
                 </div>
@@ -122,9 +118,8 @@ export default function MediaCard() {
                             </Typography>
                         </CardContent>
                         <CardActions>
-                            <Button size="small">Uptdate</Button>
-                            <Button size="small">Clear </Button>
-                            <Button size="small">Learn </Button>
+                        <Button size="small">Modifier</Button>
+                            <Button size="small">Supprimer </Button>
                         </CardActions>
                     </Card>
                 </div>
@@ -145,9 +140,77 @@ export default function MediaCard() {
                             </Typography>
                         </CardContent>
                         <CardActions>
-                            <Button size="small">Uptdate</Button>
-                            <Button size="small">Clear </Button>
-                            <Button size="small">Learn </Button>
+                        <Button size="small">Modifier</Button>
+                            <Button size="small">Supprimer </Button>
+                        </CardActions>
+                    </Card>
+                </div>
+            </div>
+            <div className='card'>
+                <div className='Card2'>
+                    <Card sx={{ maxWidth: 345 }}>
+                        <CardMedia
+                            sx={{ height: 140 }}
+                            image="https://media.istockphoto.com/id/953795296/fr/photo/bouchent-la-vue-de-la-chaussure-de-running-et-fitness-sport-noir-des-baskets-ou-des-formateurs.jpg?s=612x612&w=0&k=20&c=xG67H7OmB_bCjXJWsRsFAOmULKXLZC_6_kaT7IwgWIs="
+                            title="green iguana"
+                        />
+                        <CardContent>
+                            <Typography gutterBottom variant="h5" component="div">
+                                Lizard
+                            </Typography>
+                            <Typography variant="body2" color="text.secondary">
+                                Lizards are a widespread group of squamate reptiles, with over 6,000
+                                species, ranging across all continents except Antarctica
+                            </Typography>
+                        </CardContent>
+                        <CardActions>
+                        <Button size="small">Modifier</Button>
+                            <Button size="small">Supprimer </Button>
+                        </CardActions>
+                    </Card>
+                </div>
+                <div className='Card2'>
+                    <Card sx={{ maxWidth: 345 }}>
+                        <CardMedia
+                            sx={{ height: 140 }}
+                            image="https://media.istockphoto.com/id/527798837/fr/photo/chaussures-de-luxe.jpg?s=612x612&w=0&k=20&c=XcMlbYjmNMH-l3iOloe_3qpDb6jixT1PjMraS_a2K0M="
+                            title="green iguana"
+                        />
+                        <CardContent>
+                            <Typography gutterBottom variant="h5" component="div">
+                                Lizard
+                            </Typography>
+                            <Typography variant="body2" color="text.secondary">
+                                Lizards are a widespread group of squamate reptiles, with over 6,000
+                                species, ranging across all continents except Antarctica
+                            </Typography>
+                        </CardContent>
+                        <CardActions>
+                        <Button size="small">Modifier</Button>
+                            <Button size="small">Supprimer </Button>
+                        </CardActions>
+                    </Card>
+                </div>
+                <div className='Card2'>
+                    <Card sx={{ maxWidth: 345 }}>
+                        <CardMedia
+                            sx={{ height: 140 }}
+                            image="https://media.istockphoto.com/id/1324542701/fr/photo/tenez-les-chaussures-de-sport-sur-fond-rouge-tenir-de-nouvelles-baskets-de-mode-pour-courir.jpg?s=612x612&w=0&k=20&c=IZvtS-FKcjZyMi5LrzLnFvT-AajtMi_uDF7oVirx-pY="
+                            title="green iguana"
+                        />
+                        <CardContent>
+                            <Typography gutterBottom variant="h5" component="div">
+                                Lizard
+                            </Typography>
+                            <Typography variant="body2" color="text.secondary">
+                                Lizards are a widespread group of squamate reptiles, with over 6,000
+                                species, ranging across all continents except Antarctica
+                            </Typography>
+                        </CardContent>
+                        <CardActions>
+                            <Button size="small">Modifier</Button>
+                            <Button size="small">Supprimer </Button>
+                            {/* <Button size="small">Learn </Button> */}
                         </CardActions>
                     </Card>
                 </div>
