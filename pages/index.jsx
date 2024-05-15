@@ -1,8 +1,8 @@
 import Head from "next/head"
 import ResponsiveAppBar from './Navbar'
 
-import MediaCard from'../pages/components/Card'
-import BasicSpeedDial from'../pages/components/Boutonajouter'
+import MediaCards from'./components/Cards'
+import BasicSpeedDial from'./components/Boutonajouter'
 // import Contact from '../pages/components/Contact'
 
 import * as React from 'react';
@@ -20,7 +20,7 @@ export default function Home() {
       </div>
       <div><ResponsiveAppBar /></div>
 
-      <div><MediaCard /></div>
+      <div><MediaCards /></div>
       <div><BasicSpeedDial /></div>
       {/* <div><Contact /></div> */}
     
