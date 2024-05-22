@@ -1,13 +1,14 @@
 import Head from "next/head"
 import ResponsiveAppBar from './Navbar'
 
-import MediaCards from'./components/Cards'
-import BasicSpeedDial from'./components/Boutonajouter'
+import MediaCards from'./Cards'
+import BasicSpeedDial from'./Boutonajouter'
 // import Contact from '../pages/components/Contact'
 
 import * as React from 'react';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
+import FormAjouter from "./FormAjouter";
 
 
 export default function Home() {
@@ -22,6 +23,7 @@ export default function Home() {
 
       <div><MediaCards /></div>
       <div><BasicSpeedDial /></div>
+      {/* <div><FormAjouter /></div> */}
       {/* <div><Contact /></div> */}
     
 

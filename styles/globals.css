@@ -115,7 +115,16 @@ a {
 
 .carte{
   margin: auto;
+  margin-top: 2%;
+  margin-bottom: 5%;
 }
-
-
+.boxform{
+  margin: auto;
+}
+.textfield{
+ margin-top: 4%;
+}
+.bouton-ajouter{
+  margin-top: 2%;
+}
 
