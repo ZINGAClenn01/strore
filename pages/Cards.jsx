@@ -29,10 +29,10 @@ export default function MediaCards() {
     //     fetchData()
     // }, []);
 
-    // const handleClick = (id) => {
-    //     console.log("ID de l'élément cliqué :", id);
-    //     router.push(`/components/CardOne?id=${id}`);
-    // };
+    const handleClick = (id) => {
+        console.log("ID de l'élément cliqué :", id);
+        router.push(`/components/CardOne?id=${id}`);
+    };
     
   // Déclarez une fonction asynchrone pour pouvoir utiliser await
   useEffect(() => {
@@ -54,34 +54,33 @@ export default function MediaCards() {
 
     return (
         <div className='Cards'>
-             <ul>
+             {/* <ul>
         {chaussures.map(chaussure => (
           <li key={chaussure.id}>
             {chaussure.title} - {chaussure.taille}
           </li>
         ))}
-      </ul>
-            {/*posts.map(post => {
-                return <Card className='carte' key={post.id} sx={{ maxWidth: 380 }}>
+      </ul> */}
+      {chaussures.map(chaussure => ( <Card className='carte' key={chaussure.id} sx={{ maxWidth: 380 }}>
                     <CardMedia
                         sx={{ height: 300 }}
-                        image={post.attributes.image.toString()}
+                        image={chaussure.image.toString()}
                         title="green iguana"
                     />
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="div">
-                            {post.attributes.title}
+                        {chaussure.title}
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
-                            {post.attributes.plus}
+                            {chaussure.plus}
                         </Typography>
                     </CardContent>
-                    <CardActions key={post._id}>
-                        <Button key={post._id} size="small" onClick={() => handleClick(post.id)}>Lire plus</Button>
+                    <CardActions key={chaussure._id}>
+                        <Button key={chaussure._id} size="small" onClick={() => handleClick(chaussure.id)}>Lire plus</Button>
 
                     </CardActions>
                 </Card>
-            })*/}
+            ))}
         </div>
     );
 }
