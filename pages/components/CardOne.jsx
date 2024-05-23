@@ -8,46 +8,59 @@ import Typography from '@mui/material/Typography';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { collection, getDocs } from "firebase/firestore";
+import { db } from '../../Firebase/Fibase';
 
 function CardOne() {
     const router = useRouter();
-    const { id } = router.query;
-    const [postDetails, setPostDetails] = useState([]);
+    const { id: routerId } = router.query;
+    const [selectedItemId, setSelectedItemId] = useState(null);
+    const [chaussures, setChaussures] = useState([]);
 
     useEffect(() => {
-        const fetchPostDetails = async () => {
-            try {
-                const response = await axios.get(`http://localhost:1337/api/posts/${id}`);
-                setPostDetails(response.data.data.attributes); console.log(response.data.data.attributes);
-            } catch (error) {
-                console.error('Error fetching post details:', error);
-            }
+        const fetchData = async () => {
+            // Utilise seulement le nom de la collection "chaussure"
+            const querySnapshot = await getDocs(collection(db, `chaussure`));
+        
+            // Filtrer les documents pour trouver celui qui correspond à l'identifiant spécifié
+            const chaussureData = querySnapshot.docs
+                .filter((doc) => doc.id === routerId)
+                .map((doc) => ({
+                    id: doc.id,
+                    ...doc.data()
+                }));
+        
+            setChaussures(chaussureData);
         };
-
-        if (id) {
-            fetchPostDetails(); console.log(id);
-            console.log(postDetails);
+        if (routerId) {
+            fetchData();
         }
-    }, [id]);
-    console.log(postDetails);
+    }, [routerId]);
+
+    const handleItemClick = (itemId) => {
+        if (itemId === routerId) {
+            setSelectedItemId(itemId);
+        } else {
+            setSelectedItemId(null);
+        }
+    };
 
     return (
         <div>
-            {postDetails ? (
-                <div>
-
-                    <Card sx={{ maxWidth: 380 }}>
+            {chaussures.map((chaussure) => (
+                <div key={chaussure.id}>
+                    <Card sx={{ maxWidth: 380 }} onClick={() => handleItemClick(chaussure.id)}>
                         <CardMedia
                             sx={{ height: 300 }}
-                            image={postDetails.image}
+                            image={chaussure.image}
                             title="green iguana"
                         />
                         <CardContent>
                             <Typography gutterBottom variant="h5" component="div">
-                                {postDetails.title}
+                                {chaussure.title}
                             </Typography>
                             <Typography variant="body2" color="text.secondary">
-                                {postDetails.plus}
+                                {chaussure.plus}
                             </Typography>
                         </CardContent>
                         <CardActions>
@@ -56,12 +69,16 @@ function CardOne() {
                         </CardActions>
                     </Card>
                 </div>
-            ) : (
-                <p>Chargement des détails du post...</p>
+            ))}
+            {selectedItemId && (
+                <div>
+                    {/* Affiche ici les détails de l'élément sélectionné */}
+                </div>
             )}
         </div>
     );
 }
+
 export default CardOne;
 
 
