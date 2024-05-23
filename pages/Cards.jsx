@@ -24,8 +24,6 @@ export default function MediaCards() {
         router.push(`/components/CardOne?id=${id}`);
         console.log(router);
     };
-
-    // Déclarez une fonction asynchrone pour pouvoir utiliser await
     useEffect(() => {
         const fetchData = async () => {
             const querySnapshot = await getDocs(collection(db, "chaussure"));
@@ -39,7 +37,7 @@ export default function MediaCards() {
             setChaussures(chaussureData);
         };
         fetchData();
-    }, []); console.log(chaussures); 
+    }, []); console.log(chaussures);
     console.log(router);
 
     return (

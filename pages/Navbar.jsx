@@ -15,7 +15,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import InputBase from '@mui/material/InputBase';
-import { styled, alpha } from '@mui/material/styles';import SearchIcon from '@mui/icons-material/Search';
+import { styled, alpha } from '@mui/material/styles'; import SearchIcon from '@mui/icons-material/Search';
 import Link from 'next/link';
 
 
@@ -80,13 +80,13 @@ function DrawerAppBar(props) {
       </Typography>
       <Divider />
       <List>
-      <Link href="/Contact"> {navItems.map((item) => (
+        <Link href="/Contact"> {navItems.map((item) => (
           <ListItem key={item} disablePadding>
             <ListItemButton sx={{ textAlign: 'center' }}>
               <ListItemText primary={item} />
             </ListItemButton>
           </ListItem>
-        ))}</Link> 
+        ))}</Link>
       </List>
     </Box>
   );
@@ -127,7 +127,7 @@ function DrawerAppBar(props) {
 
 
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-           <Link href="/Contact"> {navItems.map((item) => (
+            <Link href="/Contact"> {navItems.map((item) => (
               <Button key={item} sx={{ color: '#fff' }}>
                 {item}
               </Button>

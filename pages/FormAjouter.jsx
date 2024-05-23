@@ -5,11 +5,10 @@ import Button from '@mui/material/Button';
 import React from 'react';
 import { useState } from 'react';
 import { doc, setDoc } from "firebase/firestore"; 
-import { db } from "../Firebase/Fibase"; // Assurez-vous d'importer votre instance de firebase/firestore
+import { db } from "../Firebase/Fibase"; 
 
 export default function MonFormulaire() {
   // Définition des états des champs de formulaire
-
   const [formData, setFormData] = useState({
     title: '',
     image: '',
@@ -58,8 +57,8 @@ export default function MonFormulaire() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Box
+    <form className='formulaire-ajouter' onSubmit={handleSubmit}>
+      <Box 
         sx={{
           width: 1000,
           maxWidth: '100%',
@@ -67,6 +66,7 @@ export default function MonFormulaire() {
         className="boxform"
       >
         <TextField className='textfield'
+        sx={{ m: 1, width: '80%' }}
           label="Image de l'article en Url"
           type="url"
           id="image"
@@ -76,6 +76,7 @@ export default function MonFormulaire() {
         />
 
         <TextField className='textfield'
+        sx={{ m: 1, width: '80%' }}
           label="Description de l'article"
           type="text"
           id="plus"
@@ -85,6 +86,7 @@ export default function MonFormulaire() {
         />
 
         <TextField className='textfield'
+        sx={{ m: 1, width: '80%' }}
           label="Titre de l'article"
           type="text"
           id="title"

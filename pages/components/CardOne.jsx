@@ -19,17 +19,14 @@ function CardOne() {
 
     useEffect(() => {
         const fetchData = async () => {
-            // Utilise seulement le nom de la collection "chaussure"
             const querySnapshot = await getDocs(collection(db, `chaussure`));
-        
-            // Filtrer les documents pour trouver celui qui correspond à l'identifiant spécifié
             const chaussureData = querySnapshot.docs
                 .filter((doc) => doc.id === routerId)
                 .map((doc) => ({
                     id: doc.id,
                     ...doc.data()
                 }));
-        
+
             setChaussures(chaussureData);
         };
         if (routerId) {

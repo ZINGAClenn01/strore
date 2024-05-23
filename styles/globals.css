@@ -120,11 +120,20 @@ a {
 }
 .boxform{
   margin: auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 .textfield{
  margin-top: 4%;
 }
 .bouton-ajouter{
   margin-top: 2%;
+}
+
+.formulaire-ajouter{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
