@@ -7,8 +7,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 import { db } from '../../Firebase/Fibase';
 
 function CardOne() {
@@ -16,6 +15,12 @@ function CardOne() {
     const { id: routerId } = router.query;
     const [selectedItemId, setSelectedItemId] = useState(null);
     const [chaussures, setChaussures] = useState([]);
+
+    const handleClick = (id) => {
+        console.log("ID de l'élément cliqué :", id);
+        router.push(`/components/FormUpdate?id=${id}`);
+        console.log(router);
+    };
 
     useEffect(() => {
         const fetchData = async () => {
@@ -42,8 +47,19 @@ function CardOne() {
         }
     };
 
+    const handleDelete = async (id) => {
+        try {
+            await deleteDoc(doc(db, 'chaussure', id));
+            console.log("Document successfully deleted!");
+            // Mettre à jour l'état pour refléter la suppression de l'élément
+            setChaussures(chaussures.filter(chaussure => chaussure.id !== id));
+        } catch (error) {
+            console.error("Error removing document: ", error);
+        }
+    };
+
     return (
-        <div>
+        <div> 
             {chaussures.map((chaussure) => (
                 <div key={chaussure.id}>
                     <Card sx={{ maxWidth: 380 }} onClick={() => handleItemClick(chaussure.id)}>
@@ -61,8 +77,8 @@ function CardOne() {
                             </Typography>
                         </CardContent>
                         <CardActions>
-                            <Button size="small">Modifier</Button>
-                            <Button size="small">Supprimer</Button>
+                            <Button key={chaussure.id} size="small" onClick={() => handleClick(chaussure.id)}>Modifier</Button>
+                            <Button key={chaussure.id} size="small" onClick={() => handleDelete(chaussure.id)}>Supprimer</Button>
                         </CardActions>
                     </Card>
                 </div>

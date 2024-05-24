@@ -5,10 +5,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import Link from 'next/link';
-import CardOne from './components/CardOne';
 import { useRouter } from 'next/router';
 import { collection, getDocs } from "firebase/firestore";
 import { db } from '../Firebase/Fibase';
@@ -17,8 +14,7 @@ export default function MediaCards() {
 
     const router = useRouter();
     const [chaussures, setChaussures] = useState([]);
-    const [elementCliqueId, setElementCliqueId] = useState(null);
-
+    
     const handleClick = (id) => {
         console.log("ID de l'élément cliqué :", id);
         router.push(`/components/CardOne?id=${id}`);
