@@ -30,6 +30,9 @@ import Logout from '@mui/icons-material/Settings';
 import Badge from '@mui/material/Badge';
 import { styled } from '@mui/material/styles';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import Panier from './components/Panier';
+import  { useEffect, useState } from 'react';
+
 
 
 
@@ -38,8 +41,9 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 const drawerWidth = 240;
 const navItems = ['Contact'];
 
-function DrawerAppBar(props) {
+function DrawerAppBar(props,{ cart }) {
   const { window } = props;
+  console.log(cart);
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const handleDrawerToggle = () => {
@@ -88,6 +92,10 @@ function DrawerAppBar(props) {
       padding: '0 4px',
     },
   }));
+  useEffect(() => {
+    console.log("Valeur de cart dans le composant Panier :", cart);
+    console.log(cart);
+}, [cart]);
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -200,11 +208,10 @@ function DrawerAppBar(props) {
               Logout
             </MenuItem>
           </Menu>
-          <IconButton aria-label="cart">
-            <StyledBadge badgeContent={4} color="secondary">
-              <ShoppingCartIcon />
-            </StyledBadge>
-          </IconButton>
+
+
+          <Panier cart={cart} />
+
 
           <Box className='link-nav' sx={{ display: { xs: 'none', sm: 'block' } }}>
             <Link href="/Contact"> {navItems.map((item) => (

@@ -1,100 +1,79 @@
-import TextField from '@mui/material/TextField';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
+import { useState } from "react";
 import React from 'react';
-import { useState } from 'react';
-import { doc, setDoc } from "firebase/firestore"; 
-import { db } from "../Firebase/Fibase"; 
 
 export default function MonFormulaire() {
   // Définition des états des champs de formulaire
-  const [formData, setFormData] = useState({
-    title: '',
-    image: '',
-    plus: ''
-  });
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value
-    });
-  };
+  const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = async (e) => {
+  function submit(e) {
+    // This will prevent page refresh
     e.preventDefault();
-    try {
-      // Appel à la fonction pour ajouter l'élément dans Firestore
-      await ajouterElementDansFirestore(formData);
-      console.log('Article ajouté avec succès !');
 
-      // Réinitialisation du formulaire après l'ajout
-      setFormData({
-        title: '',
-        image: '',
-        plus: ''
-      });
-    } catch (error) {
-      console.error("Erreur lors de l'ajout de l'article : ", error);
-    }
-  };
+    // replace this with your own unique endpoint URL
+    fetch("https://formcarry.com/s/iMNHre22jSF", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify({ name: name , email: email, message: message })
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.code === 200) {
+          setSubmitted(true);
+        } else {
+          setError(res.message);
+        }
+      })
+      .catch((error) => setError(error));
+  }
 
-  const ajouterElementDansFirestore = async (data) => {
-    try {
-      // Ajout de l'élément dans la collection "chaussure"
-      await setDoc(doc(db, "chaussure", data.title), {
-        title: data.title,
-        image: data.image,
-        plus: data.plus
-      });
-  
-      console.log("Document ajouté avec succès !");
-    } catch (error) {
-      console.error("Erreur lors de l'ajout du document : ", error);
-    }
-  };
+  if (error) {
+    return <p>{error}</p>;
+  }
+
+  if (submitted) {
+    return <p>Merci de nous avoir contacter nous avons recu votre message... Veillez Appuyez sur retour
+      Merci pour votre contribution
+    </p>;
+  }
 
   return (
-    <form className='formulaire-ajouter' onSubmit={handleSubmit}>
-      <Box 
-        sx={{
-          width: 1000,
-          maxWidth: '100%',
-        }}
-        className="boxform"
-      >
-        <TextField className='textfield'
-        sx={{ m: 1, width: '80%' }}
-          label="Image de l'article en Url"
-          type="url"
-          id="image"
-          name="image"
-          value={formData.image}
-          onChange={handleChange}
-        />
-
-        <TextField className='textfield'
-        sx={{ m: 1, width: '80%' }}
-          label="Description de l'article"
-          type="text"
-          id="plus"
-          name="plus"
-          value={formData.plus}
-          onChange={handleChange}
-        />
-
-        <TextField className='textfield'
-        sx={{ m: 1, width: '80%' }}
-          label="Titre de l'article"
-          type="text"
-          id="title"
-          name="title"
-          value={formData.title}
-          onChange={handleChange}
-        />
-        <Button variant="contained" className='bouton-ajouter' type="submit">Créer un article</Button>
-      </Box>
+    <section class="formcarry-container">
+    <form onSubmit={submit}>
+      
+      <div class="formcarry-block">
+        <label htmlFor="fc-generated-1-name">Tout le nom</label>
+        <input type="text" name="name" id="fc-generated-1-name" placeholder="Entrer le nom complet"  value={name}
+        onChange={(e) => setName(e.target.value)}
+        required/>
+      </div>
+      
+      <div class="formcarry-block">
+        <label htmlFor="fc-generated-1-email">Votre adresse mail</label>
+        <input type="email" name="email" id="fc-generated-1-email email" placeholder="john@doe.com"  value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        required/>
+      </div>
+      
+      <div class="formcarry-block">
+        <label htmlFor="fc-generated-1-message">Your message</label>
+        <textarea name="message" id="fc-generated-1-message" placeholder="Entrer votre message..."  value={message}
+        onChange={(e) => setMessage(e.target.value)}
+        required></textarea>
+      </div>
+      
+      <div class="formcarry-block">  
+        <button type="submit">Envoyer</button>
+      </div>
+    
     </form>
+  </section>
   );
 };
