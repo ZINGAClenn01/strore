@@ -155,7 +155,7 @@ a {
   line-height: 24px;
   letter-spacing: -0.01em;
 
-  width: 400px;
+  width: 380px;
 
   /* NORMAL */
   --fc-normal-filed-bg-color: #F7F9FC;
@@ -311,3 +311,23 @@ a {
   border-color: hsl(var(--fc-error-hsl));
   box-shadow: 0px 1px 6px hsla(var(--fc-error-hsl), 17%), 0px 2px 0px hsla(var(--fc-error-hsl), 14%);
 }
+.h1-formcontact{
+  font-size: 32px;
+  line-height: 150px;
+  text-shadow: -1px -1px #6a66a7, 1px 1px #5e5a9c, -3px 0 4px #aca8e0;
+  font-family:"Segoe print", Arial, Helvetica, sans-serif;
+  color: #0E0B3D; 
+  padding:32px;
+  font-weight:lighter;
+  -moz-box-shadow: 2px 2px 6px #888;  
+  -webkit-box-shadow: 2px 2px 6px #888;  
+  box-shadow:2px 2px 6px #888;  
+  text-align:center;
+  display:inline;
+}
+/* .Panier-icon{
+  position: absolute;
+  margin-top: -125%;
+margin-left: 0%;
+  z-index: 4;
+} */

@@ -1,5 +1,5 @@
 import Head from "next/head"
-import ResponsiveAppBar from './Navbar'
+import ResponsiveAppBar from './components/Navbar'
 
 import MediaCards from './Cards'
 import BasicSpeedDial from './Boutonajouter'

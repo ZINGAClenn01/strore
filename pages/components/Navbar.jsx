@@ -30,7 +30,7 @@ import Logout from '@mui/icons-material/Settings';
 import Badge from '@mui/material/Badge';
 import { styled } from '@mui/material/styles';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import Panier from './components/Panier';
+import Panier from './Panier';
 import  { useEffect, useState } from 'react';
 
 
@@ -41,9 +41,11 @@ import  { useEffect, useState } from 'react';
 const drawerWidth = 240;
 const navItems = ['Contact'];
 
-function DrawerAppBar(props,{ cart }) {
-  const { window } = props;
+function Navbar (props) {
+  const { cart } = props;
   console.log(cart);
+
+  const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const handleDrawerToggle = () => {
@@ -92,10 +94,7 @@ function DrawerAppBar(props,{ cart }) {
       padding: '0 4px',
     },
   }));
-  useEffect(() => {
-    console.log("Valeur de cart dans le composant Panier :", cart);
-    console.log(cart);
-}, [cart]);
+
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -135,6 +134,7 @@ function DrawerAppBar(props,{ cart }) {
             </Select>
             {/* <FormHelperText>Rechercher plus rapidement</FormHelperText> */}
           </FormControl>
+          
           <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
 
             <Tooltip title="Account settings">
@@ -249,7 +249,7 @@ function DrawerAppBar(props,{ cart }) {
   );
 }
 
-DrawerAppBar.propTypes = {
+Navbar .propTypes = {
   /**
    * Injected by the documentation to work in an iframe.
    * You won't need it on your project.
@@ -257,4 +257,4 @@ DrawerAppBar.propTypes = {
   window: PropTypes.func,
 };
 
-export default DrawerAppBar;
+export default Navbar ;

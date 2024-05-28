@@ -39,9 +39,9 @@ export default function MonFormulaire() {
   }
 
   if (submitted) {
-    return <p>Merci de nous avoir contacter nous avons recu votre message... Veillez Appuyez sur retour
+    return <h1 className="h1-formcontact">Merci de nous avoir contacter nous avons recu votre message... Veillez Appuyez sur retour
       Merci pour votre contribution
-    </p>;
+    </h1>;
   }
 
   return (
@@ -69,7 +69,7 @@ export default function MonFormulaire() {
         required></textarea>
       </div>
       
-      <div class="formcarry-block">  
+      <div className="formcarry-block">  
         <button type="submit">Envoyer</button>
       </div>
     

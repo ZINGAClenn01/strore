@@ -10,10 +10,10 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { collection, getDocs } from "firebase/firestore";
 import { db } from '../Firebase/Fibase';
-import Panier from './components/Panier'; 
+import Navbar from './components/Navbar'; // Import Navbar component
+import Panier from './components/Panier';
 
 export default function MediaCards() {
-
     const router = useRouter();
     const [chaussures, setChaussures] = useState([]);
     const [cart, setCart] = useState([]);
@@ -28,10 +28,9 @@ export default function MediaCards() {
         const itemToAdd = chaussures.find(chaussure => chaussure.id === id);
         if (itemToAdd) {
             setCart([...cart, itemToAdd]);
-        } console.log(cart);
-        
+        }
     };
-    console.log(cart);
+
     useEffect(() => {
         const fetchData = async () => {
             const querySnapshot = await getDocs(collection(db, "chaussure"));
@@ -49,6 +48,7 @@ export default function MediaCards() {
 
     return (
         <div className='Cards'>
+
             {chaussures.map(chaussure => (
                 <Card className='carte' key={chaussure.id} sx={{ maxWidth: 380 }}>
                     <CardMedia
@@ -70,8 +70,9 @@ export default function MediaCards() {
                     </CardActions>
                 </Card>
             ))}
-            {/* Passer le panier au composant Panier */}
-            <Panier cart={cart} />
+            <Navbar cart={cart} /> 
+            {/* <div className="Panier-icon"> <Panier cart={cart}  /></div> */}
+
         </div>
     );
 }
