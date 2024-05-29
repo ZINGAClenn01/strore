@@ -325,9 +325,9 @@ a {
   text-align:center;
   display:inline;
 }
-/* .Panier-icon{
-  position: absolute;
-  margin-top: -125%;
-margin-left: 0%;
-  z-index: 4;
-} */
+.carte-panier{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}

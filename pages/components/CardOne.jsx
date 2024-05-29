@@ -9,7 +9,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 import { db } from '../../Firebase/Fibase';
-import Navbar from './Navbar';
+import Navbar from '../Navbar';
 
 function CardOne({ cart }) {
     const router = useRouter();

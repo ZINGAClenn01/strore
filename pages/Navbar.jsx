@@ -1,4 +1,4 @@
-import React from 'react'; // Ajoute cette ligne pour importer React
+import React from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -30,20 +30,15 @@ import Logout from '@mui/icons-material/Settings';
 import Badge from '@mui/material/Badge';
 import { styled } from '@mui/material/styles';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import Panier from './Panier';
-import  { useEffect, useState } from 'react';
-
-
-
-
-
+import Panier from './components/Panier';
+import { useEffect, useState } from 'react';
+import PagePanier from './PagePanier';
 
 const drawerWidth = 240;
 const navItems = ['Contact'];
 
-function Navbar (props) {
+function Navbar(props) {
   const { cart } = props;
-  console.log(cart);
 
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -64,13 +59,15 @@ function Navbar (props) {
       </Typography>
       <Divider />
       <List>
-        <Link href="/Contact"> {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
-            <ListItemButton sx={{ textAlign: 'center' }}>
-              <ListItemText primary={item} />
-            </ListItemButton>
-          </ListItem>
-        ))}</Link>
+        <Link href="/Contact">
+          {navItems.map((item) => (
+            <ListItem key={item} disablePadding>
+              <ListItemButton sx={{ textAlign: 'center' }}>
+                <ListItemText primary={item} />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </Link>
       </List>
     </Box>
   );
@@ -98,7 +95,7 @@ function Navbar (props) {
 
   return (
     <Box sx={{ display: 'flex' }}>
-      
+
       <AppBar component="nav">
         <Toolbar>
           <IconButton
@@ -118,7 +115,7 @@ function Navbar (props) {
             APP STORE
           </Typography>
 
-          <FormControl  sx={{ m: 1, minWidth: 120 }}>
+          <FormControl sx={{ m: 1, minWidth: 120 }}>
             <Select className='select-nav'
               value={age}
               onChange={handleChange}
@@ -132,9 +129,8 @@ function Navbar (props) {
               <MenuItem value={20}>Twenty</MenuItem>
               <MenuItem value={30}>Thirty</MenuItem>
             </Select>
-            {/* <FormHelperText>Rechercher plus rapidement</FormHelperText> */}
           </FormControl>
-          
+
           <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
 
             <Tooltip title="Account settings">
@@ -189,12 +185,12 @@ function Navbar (props) {
               <Avatar /> My account
             </MenuItem>
             <Divider />
-            <MenuItem onClick={handleClose}>
+            {/* <MenuItem onClick={handleClose}>
               <ListItemIcon>
                 <PersonAdd fontSize="small" />
               </ListItemIcon>
               Add another account
-            </MenuItem>
+            </MenuItem> */}
             <MenuItem onClick={handleClose}>
               <ListItemIcon>
                 <Settings fontSize="small" />
@@ -209,16 +205,18 @@ function Navbar (props) {
             </MenuItem>
           </Menu>
 
-
-          <Panier cart={cart} />
-
+          <Link href="./PagePanier">
+            <Panier cart={cart} />
+          </Link>
 
           <Box className='link-nav' sx={{ display: { xs: 'none', sm: 'block' } }}>
-            <Link href="/Contact"> {navItems.map((item) => (
-              <Button key={item} sx={{ color: '#fff' }}>
-                {item}
-              </Button>
-            ))}</Link>
+            <Link href="/Contact">
+              {navItems.map((item) => (
+                <Button key={item} sx={{ color: '#fff' }}>
+                  {item}
+                </Button>
+              ))}
+            </Link>
           </Box>
         </Toolbar>
       </AppBar>
@@ -249,7 +247,7 @@ function Navbar (props) {
   );
 }
 
-Navbar .propTypes = {
+Navbar.propTypes = {
   /**
    * Injected by the documentation to work in an iframe.
    * You won't need it on your project.
@@ -257,4 +255,4 @@ Navbar .propTypes = {
   window: PropTypes.func,
 };
 
-export default Navbar ;
+export default Navbar;
