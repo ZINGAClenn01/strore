@@ -1,8 +1,7 @@
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { doc, setDoc } from "firebase/firestore"; 
 import { db } from "../Firebase/Fibase"; 
 
@@ -11,7 +10,8 @@ export default function MonFormulaire() {
   const [formData, setFormData] = useState({
     title: '',
     image: '',
-    plus: ''
+    plus: '',
+    pris: '' // Ajout du champ pris
   });
 
   const handleChange = (e) => {
@@ -33,7 +33,8 @@ export default function MonFormulaire() {
       setFormData({
         title: '',
         image: '',
-        plus: ''
+        plus: '',
+        pris: ''
       });
     } catch (error) {
       console.error("Erreur lors de l'ajout de l'article : ", error);
@@ -46,7 +47,8 @@ export default function MonFormulaire() {
       await setDoc(doc(db, "chaussure", data.title), {
         title: data.title,
         image: data.image,
-        plus: data.plus
+        plus: data.plus,
+        pris: data.pris // Inclure le prix
       });
   
       console.log("Document ajouté avec succès !");
@@ -93,6 +95,17 @@ export default function MonFormulaire() {
           value={formData.title}
           onChange={handleChange}
         />
+
+        <TextField className='textfield'
+        sx={{ m: 1, width: '80%' }}
+          label="Prix de l'article"
+          type="number" // Champ de type nombre pour le prix
+          id="pris"
+          name="pris"
+          value={formData.pris}
+          onChange={handleChange}
+        />
+        
         <Button variant="contained" className='bouton-ajouter' type="submit">Créer un article</Button>
       </Box>
     </form>

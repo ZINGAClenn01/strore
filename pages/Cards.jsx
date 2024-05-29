@@ -5,6 +5,10 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
+import { styled } from '@mui/material/styles';
+import Box from '@mui/material/Box';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { collection, getDocs } from "firebase/firestore";
@@ -53,6 +57,14 @@ export default function MediaCards() {
         router.push(`/components/CardOne?id=${id}`);
     };
 
+    const Item = styled(Paper)(({ theme }) => ({
+        backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+        ...theme.typography.body2,
+        padding: theme.spacing(1),
+        textAlign: 'center',
+        color: theme.palette.text.secondary,
+    }));
+
     return (
         <div className='Cards'>
             {chaussures.map(chaussure => (
@@ -69,10 +81,14 @@ export default function MediaCards() {
                         <Typography variant="body2" color="text.secondary">
                             {chaussure.plus}
                         </Typography>
+                        
+                        <Grid className='price' item xs={8}>
+                            <Item className='text-price'>{chaussure.pris + " Fcfa"}</Item>
+                        </Grid>
                     </CardContent>
                     <CardActions>
-                        <Button size="small" onClick={() => handleClick(chaussure.id)}>Lire plus</Button>
-                        <Button size="small" onClick={() => addToCart(chaussure.id)}>Ajouter au panier</Button>
+                        <Button variant="contained" size="small" onClick={() => handleClick(chaussure.id)} >Lire plus</Button>
+                        <Button variant="contained" size="small" onClick={() => addToCart(chaussure.id)}>Ajouter au panier</Button>
                     </CardActions>
                 </Card>
             ))}

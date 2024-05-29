@@ -331,3 +331,11 @@ a {
   justify-content: center;
   flex-wrap: wrap;
 }
+
+.price{
+  margin-top: 4%;
+}
+.text-price{
+  color: #f508f5;
+font-size: x-large;
+}
