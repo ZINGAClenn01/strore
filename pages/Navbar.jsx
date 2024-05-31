@@ -33,6 +33,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Panier from './components/Panier';
 import { useEffect, useState } from 'react';
 import PagePanier from './PagePanier';
+import FormConnectUser from './FormConnectUser'
 
 const drawerWidth = 240;
 const navItems = ['Contact'];
@@ -182,26 +183,28 @@ function Navbar(props) {
             anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
           >
             <MenuItem onClick={handleClose}>
-              <Avatar /> My account
+              <Avatar /> Mon compte
             </MenuItem>
             <Divider />
-            {/* <MenuItem onClick={handleClose}>
-              <ListItemIcon>
-                <PersonAdd fontSize="small" />
-              </ListItemIcon>
-              Add another account
-            </MenuItem> */}
+            <Link href="./FormConnectUser"  style={{ textDecoration: 'none' }}>
+              <MenuItem onClick={handleClose}>
+                <ListItemIcon>
+                  <PersonAdd fontSize="small" />
+                </ListItemIcon>
+                Creer un compte
+              </MenuItem>
+            </Link>
             <MenuItem onClick={handleClose}>
               <ListItemIcon>
                 <Settings fontSize="small" />
               </ListItemIcon>
-              Settings
+              Parametre
             </MenuItem>
             <MenuItem onClick={handleClose}>
               <ListItemIcon>
                 <Logout fontSize="small" />
               </ListItemIcon>
-              Logout
+              Deconnexion
             </MenuItem>
           </Menu>
 
@@ -210,7 +213,7 @@ function Navbar(props) {
           </Link>
 
           <Box className='link-nav' sx={{ display: { xs: 'none', sm: 'block' } }}>
-            <Link href="/Contact">
+            <Link href="/Contact" style={{ textDecoration: 'none' }}>
               {navItems.map((item) => (
                 <Button key={item} sx={{ color: '#fff' }}>
                   {item}

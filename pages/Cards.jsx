@@ -72,7 +72,7 @@ export default function MediaCards() {
                     <CardMedia
                         sx={{ height: 300 }}
                         image={chaussure.image.toString()}
-                        title="green iguana"
+                        title="Chaussure"
                     />
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="div">
