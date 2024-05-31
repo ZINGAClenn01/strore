@@ -1,65 +1,102 @@
-// pages/login.js
 import React, { useState } from 'react';
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from '../Firebase/Fibase';
+import { useRouter } from 'next/router';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, getAuth } from 'firebase/auth';
+import { doc, setDoc, getDoc } from 'firebase/firestore';
+import { auth, firestore } from '../Firebase/Fibase';
 
 const FormConnectUser = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [isRegistered, setIsRegistered] = useState(false);
+    const router = useRouter();
 
-    const handleSubmit = (event) => {
+    const handleSignUp = async (event) => {
         event.preventDefault();
-        createUserWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                // Signed up 
-                const user = userCredential.user;
-                console.log('User signed up:', user);
-                // Additional user setup if needed
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.error('Error signing up:', errorCode, errorMessage);
+        try {
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            const user = userCredential.user;
+            console.log('User signed up:', user);
+
+            // Add user to Firestore
+            await setDoc(doc(firestore, 'users', user.uid), {
+                email: user.email,
+                uid: user.uid,
             });
-            // Créez un formulaire qui permet aux utilisateurs existants de se connecter 
-            //à l'aide de leur adresse e-mail et de leur mot de passe. 
-            //Lorsqu'un utilisateur remplit le formulaire, appelez la méthode signInWithEmailAndPassword :
-        const auth = getAuth();
-        signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                // Signed in 
-                const user = userCredential.user;
-                // ...
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-            });
+
+            setIsRegistered(true);
+        } catch (error) {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.error('Error signing up:', errorCode, errorMessage);
+        }
     };
-    console.log(email);
-    console.log(password);
+
+    const handleSignIn = async (event) => {
+        event.preventDefault();
+        try {
+            const authInstance = getAuth();
+            const userCredential = await signInWithEmailAndPassword(authInstance, email, password);
+            const user = userCredential.user;
+            console.log('User signed in:', user);
+
+            // Verify user in Firestore
+            const userDoc = await getDoc(doc(firestore, 'users', user.uid));
+            if (userDoc.exists()) {
+                console.log('User exists in Firestore:', userDoc.data());
+                router.push('/dashboard');
+            } else {
+                console.error('User does not exist in Firestore');
+            }
+        } catch (error) {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.error('Error signing in:', errorCode, errorMessage);
+        }
+    };
+
     return (
-        <form onSubmit={handleSubmit}>
-            <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Email"
-            />
-            <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Mot de passe"
-            />
-            <button type="submit">S'inscrire</button>
-        </form>
-
-
+        <>
+            {!isRegistered ? (
+                <form onSubmit={handleSignUp} className="form-container">
+                    <h1 className="form-title">Inscrivez-vous</h1>
+                    <input
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="Email"
+                        className="form-input"
+                    />
+                    <input
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="Mot de passe"
+                        className="form-input"
+                    />
+                    <button type="submit" className="form-button">S'inscrire</button>
+                </form>
+            ) : (
+                <form onSubmit={handleSignIn} className="form-container">
+                    <h1 className="form-title">Se connecter</h1>
+                    <input
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="Email"
+                        className="form-input"
+                    />
+                    <input
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="Mot de passe"
+                        className="form-input"
+                    />
+                    <button type="submit" className="form-button">Se connecter</button>
+                </form>
+            )}
+        </>
     );
 };
 
 export default FormConnectUser;
-
-
-

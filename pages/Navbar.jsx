@@ -182,11 +182,13 @@ function Navbar(props) {
             transformOrigin={{ horizontal: 'right', vertical: 'top' }}
             anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
           >
-            <MenuItem onClick={handleClose}>
-              <Avatar /> Mon compte
-            </MenuItem>
+            <Link href="./FormMonCompte" style={{ textDecoration: 'none' }}>
+              <MenuItem onClick={handleClose}>
+                <Avatar /> Mon compte
+              </MenuItem>
+            </Link>
             <Divider />
-            <Link href="./FormConnectUser"  style={{ textDecoration: 'none' }}>
+            <Link href="./FormConnectUser" style={{ textDecoration: 'none' }}>
               <MenuItem onClick={handleClose}>
                 <ListItemIcon>
                   <PersonAdd fontSize="small" />
@@ -246,7 +248,7 @@ function Navbar(props) {
 
         </Typography>
       </Box>
-    </Box>
+    </Box >
   );
 }
 
