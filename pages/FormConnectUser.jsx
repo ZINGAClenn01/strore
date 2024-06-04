@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, getAuth } from 'firebase/auth';
-import { doc, setDoc, getDoc } from 'firebase/firestore';
-import { auth, firestore } from '../Firebase/Fibase';
+import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
+import { doc, setDoc } from 'firebase/firestore';
+import { auth, firestore } from '../Firebase/Fibase'; // Assurez-vous que ces importations sont correctes
+import FormMonCompte from './FormMonCompte';
 
 const FormConnectUser = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isRegistered, setIsRegistered] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
     const router = useRouter();
 
     const handleSignUp = async (event) => {
@@ -15,10 +17,11 @@ const FormConnectUser = () => {
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
-            console.log('User signed up:', user);
+            console.log('Utilisateur inscrit:', user);
 
-            // Add user to Firestore
-            await setDoc(doc(firestore, 'users', user.uid), {
+            // Ajouter l'utilisateur à Firestore
+            const userDocRef = doc(firestore, 'users', user.uid);
+            await setDoc(userDocRef, {
                 email: user.email,
                 uid: user.uid,
             });
@@ -27,31 +30,18 @@ const FormConnectUser = () => {
         } catch (error) {
             const errorCode = error.code;
             const errorMessage = error.message;
-            console.error('Error signing up:', errorCode, errorMessage);
+            console.error('Erreur lors de l\'inscription:', errorCode, errorMessage);
+
+            if (errorCode === 'auth/email-already-in-use') {
+                setErrorMessage('Cet email est déjà utilisé. Veuillez vous connecter.');
+            } else {
+                setErrorMessage('Une erreur est survenue lors de l\'inscription. Veuillez réessayer.');
+            }
         }
     };
 
-    const handleSignIn = async (event) => {
-        event.preventDefault();
-        try {
-            const authInstance = getAuth();
-            const userCredential = await signInWithEmailAndPassword(authInstance, email, password);
-            const user = userCredential.user;
-            console.log('User signed in:', user);
-
-            // Verify user in Firestore
-            const userDoc = await getDoc(doc(firestore, 'users', user.uid));
-            if (userDoc.exists()) {
-                console.log('User exists in Firestore:', userDoc.data());
-                router.push('/dashboard');
-            } else {
-                console.error('User does not exist in Firestore');
-            }
-        } catch (error) {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.error('Error signing in:', errorCode, errorMessage);
-        }
+    const handleSignInRedirect = () => {
+        router.push('./FormMonCompte');
     };
 
     return (
@@ -74,26 +64,22 @@ const FormConnectUser = () => {
                         className="form-input"
                     />
                     <button type="submit" className="form-button">S'inscrire</button>
+                    {errorMessage && (
+                        <div className="error-message">
+                            {errorMessage} <a href="#" onClick={handleSignInRedirect}>Se connecter</a>
+                        </div>
+                    )}
                 </form>
             ) : (
-                <form onSubmit={handleSignIn} className="form-container">
-                    <h1 className="form-title">Se connecter</h1>
-                    <input
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        placeholder="Email"
-                        className="form-input"
-                    />
-                    <input
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        placeholder="Mot de passe"
-                        className="form-input"
-                    />
-                    <button type="submit" className="form-button">Se connecter</button>
-                </form>
+                <div className="form-container">
+                    <h1 className="form-title">Inscription réussie</h1>
+                    <button
+                        onClick={() => router.push('./FormMonCompte')}
+                        className="form-button"
+                    >
+                        Se connecter au dashboard
+                    </button>
+                </div>
             )}
         </>
     );

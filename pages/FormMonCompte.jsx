@@ -1,23 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import FormConnectUser from './FormConnectUser';
-import Dashboard from './Dashboard';
+import { signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../Firebase/Fibase'; // Assurez-vous que auth est correctement initialisé depuis Firebase
 
 function FormMonCompte() {
-
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showSignUpButton, setShowSignUpButton] = useState(false);
     const router = useRouter();
 
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (user) {
+                console.log('Utilisateur déjà connecté:', user);
+                router.push('./Dashboard');
+            }
+        });
+
+        return () => unsubscribe();
+    }, [router]);
+
     const handleSignIn = async (event) => {
         event.preventDefault();
         
         try {
-            const authInstance = getAuth();
-            const userCredential = await signInWithEmailAndPassword(authInstance, email, password);
+            const userCredential = await signInWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
 
             console.log('Utilisateur connecté :', user);
@@ -61,7 +68,7 @@ function FormMonCompte() {
                 </button>
             )}
         </div>
-    )
+    );
 }
 
 export default FormMonCompte;

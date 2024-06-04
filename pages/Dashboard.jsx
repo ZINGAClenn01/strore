@@ -1,13 +1,32 @@
-// pages/dashboard.js
+import React from 'react';
+import { useRouter } from 'next/router';
+import { signOut } from 'firebase/auth';
+import { auth } from '../Firebase/Fibase'; // Assurez-vous que auth est correctement initialisé depuis Firebase
+import MediaCards from './Cards'
+import Navbar from './Navbar';
 
-export default function Dashboard() {
-    // Ici vous pouvez ajouter la logique pour récupérer les données de l'utilisateur ou d'autres informations nécessaires
-    
+const Dashboard = () => {
+    const router = useRouter();
+
+    const handleSignOut = async () => {
+        try {
+            await signOut(auth);
+            console.log('Utilisateur déconnecté');
+            router.push('./Cards');
+        } catch (error) {
+            console.error('Erreur lors de la déconnexion:', error);
+        }
+    };
+
     return (
-        <div className="dashboard-container">
-            <h2>Bienvenue sur votre Tableau de Bord</h2>
-            <p>Vous êtes connecté avec succès!</p>
-            {/* Ajoutez ici d'autres éléments de votre tableau de bord, comme les achats récents ou les produits les plus achetés */}
+        <>
+        <Navbar/>
+        <div>
+            <h1>Bienvenue au Dashboard</h1>
+            <button onClick={handleSignOut} className="form-button">Se déconnecter</button>
         </div>
+        </>
     );
-}
+};
+
+export default Dashboard;
