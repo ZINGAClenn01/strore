@@ -4,6 +4,8 @@ import { signOut } from 'firebase/auth';
 import { auth } from '../Firebase/Fibase'; // Assurez-vous que auth est correctement initialisé depuis Firebase
 import MediaCards from './Cards'
 import Navbar from './Navbar';
+import { Nav } from 'react-bootstrap';
+import NavbarDashboard from './NavbarDashboard';
 
 const Dashboard = () => {
     const router = useRouter();
@@ -19,10 +21,13 @@ const Dashboard = () => {
     };
 
     return (
+        <>
+        <NavbarDashboard handleSignOut={handleSignOut}/>
         <div>
             <h1>Bienvenue au Dashboard</h1>
             <button onClick={handleSignOut} className="form-button">Se déconnecter</button>
         </div>
+        </>
     );
 };
 

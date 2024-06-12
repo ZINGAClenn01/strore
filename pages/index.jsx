@@ -90,7 +90,7 @@ export default function Home() {
       </div>
       <div><ResponsiveAppBar /></div>
       <div><MediaCards /></div>
-      <div><BasicSpeedDial /></div>
+      {/* <div><BasicSpeedDial /></div> */}
     </>
   )
 }

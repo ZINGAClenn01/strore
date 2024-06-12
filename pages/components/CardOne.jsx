@@ -11,16 +11,15 @@ import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 import { db } from '../../Firebase/Fibase';
 import Navbar from '../Navbar';
 
-function CardOne({ cart }) {
+function CardOne({ cart,addToCart }) {
     const router = useRouter();
     const { id: routerId } = router.query;
     const [selectedItemId, setSelectedItemId] = useState(null);
     const [chaussures, setChaussures] = useState([]);
-console.log(cart);
-    const handleClick = (id) => {
-        console.log("ID de l'élément cliqué :", id);
-        router.push(`/components/FormUpdate?id=${id}`);
-    };
+    // const handleClick = (id) => {
+    //     console.log("ID de l'élément cliqué :", id);
+    //     router.push(`/components/FormUpdate?id=${id}`);
+    // };
 
     useEffect(() => {
         const fetchData = async () => {
@@ -47,15 +46,15 @@ console.log(cart);
         }
     };
 
-    const handleDelete = async (id) => {
-        try {
-            await deleteDoc(doc(db, 'chaussure', id));
-            console.log("Document successfully deleted!");
-            setChaussures(chaussures.filter(chaussure => chaussure.id !== id));
-        } catch (error) {
-            console.error("Error removing document: ", error);
-        }
-    };
+    // const handleDelete = async (id) => {
+    //     try {
+    //         await deleteDoc(doc(db, 'chaussure', id));
+    //         console.log("Document successfully deleted!");
+    //         setChaussures(chaussures.filter(chaussure => chaussure.id !== id));
+    //     } catch (error) {
+    //         console.error("Error removing document: ", error);
+    //     }
+    // };
 
     return (
         <div>
@@ -77,8 +76,8 @@ console.log(cart);
                             </Typography>
                         </CardContent>
                         <CardActions>
-                            <Button size="small" onClick={() => handleClick(chaussure.id)}>Modifier</Button>
-                            <Button size="small" onClick={() => handleDelete(chaussure.id)}>Supprimer</Button>
+                            <Button onClick={addToCart} className='button-cardone' size="small">Ajouter au panier</Button>
+                            {/* <Button size="small" onClick={() => handleDelete(chaussure.id)}>Supprimer</Button> */}
                         </CardActions>
                     </Card>
                 </div>

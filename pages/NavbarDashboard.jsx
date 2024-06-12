@@ -38,8 +38,10 @@ import FormConnectUser from './FormConnectUser'
 const drawerWidth = 240;
 const navItems = ['Contact'];
 
-function Navbar(props) {
+function NavbarDashboard
+(props) {
   const { cart } = props;
+  const {handleSignOut}= props
 
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -182,7 +184,7 @@ function Navbar(props) {
             transformOrigin={{ horizontal: 'right', vertical: 'top' }}
             anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
           >
-            <Link href="./FormMonCompte" style={{ textDecoration: 'none' }}>
+            {/* <Link href="./FormMonCompte" style={{ textDecoration: 'none' }}>
               <MenuItem onClick={handleClose}>
                 <Avatar /> Mon compte
               </MenuItem>
@@ -195,19 +197,19 @@ function Navbar(props) {
                 </ListItemIcon>
                 Creer un compte
               </MenuItem>
-            </Link>
-            {/* <MenuItem onClick={handleClose}>
+            </Link> */}
+            <MenuItem onClick={handleClose}>
               <ListItemIcon>
                 <Settings fontSize="small" />
               </ListItemIcon>
               Parametre
             </MenuItem>
-            <MenuItem onClick={handleClose}>
+            <MenuItem onClick={handleSignOut}>
               <ListItemIcon>
                 <Logout fontSize="small" />
-              </ListItemIcon>
+              </ListItemIcon >
               Deconnexion
-            </MenuItem> */}
+            </MenuItem>
           </Menu>
 
           <Link href="./PagePanier">
@@ -252,7 +254,8 @@ function Navbar(props) {
   );
 }
 
-Navbar.propTypes = {
+NavbarDashboard
+.propTypes = {
   /**
    * Injected by the documentation to work in an iframe.
    * You won't need it on your project.
@@ -260,4 +263,5 @@ Navbar.propTypes = {
   window: PropTypes.func,
 };
 
-export default Navbar;
+export default NavbarDashboard
+;
