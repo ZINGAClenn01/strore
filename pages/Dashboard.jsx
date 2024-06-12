@@ -19,13 +19,10 @@ const Dashboard = () => {
     };
 
     return (
-        <>
-        <Navbar/>
         <div>
             <h1>Bienvenue au Dashboard</h1>
             <button onClick={handleSignOut} className="form-button">Se déconnecter</button>
         </div>
-        </>
     );
 };
 
