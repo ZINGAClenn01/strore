@@ -40,6 +40,10 @@ const navItems = ['Contact'];
 
 function Navbar(props) {
   const { cart } = props;
+  const {newPanier}= props
+  console.log(newPanier);
+  const longueur = newPanier ? Object.keys(newPanier).length : 0;
+    console.log(longueur);
 
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -211,7 +215,7 @@ function Navbar(props) {
           </Menu>
 
           <Link href="./PagePanier">
-            <Panier cart={cart} />
+            <Panier cart={cart} longueur={longueur} />
           </Link>
 
           <Box className='link-nav' sx={{ display: { xs: 'none', sm: 'block' } }}>

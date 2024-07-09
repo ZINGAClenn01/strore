@@ -16,7 +16,7 @@ import { db } from '../Firebase/Fibase';
 import Navbar from './Navbar'; // Import Navbar component
 import PagePanier from './PagePanier'; // Import PagePanier component
 
-export default function MediaCards() {
+export default function CardsAdmin() {
     const router = useRouter();
     const [chaussures, setChaussures] = useState([]);
     const [cart, setCart] = useState([]);
@@ -55,7 +55,7 @@ export default function MediaCards() {
 
     const handleClick = (id) => {
         console.log("ID de l'élément cliqué :", id);
-        router.push(`/components/CardOne?id=${id}`);
+        router.push(`/components/CardOneAdmin?id=${id}`);
     };
 
     const Item = styled(Paper)(({ theme }) => ({

@@ -3,6 +3,9 @@ import IconButton from '@mui/material/IconButton';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { styled } from '@mui/material/styles';
 import Badge from '@mui/material/Badge';
+import Navbar from '../Navbar';
+
+
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
@@ -13,8 +16,10 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
     },
 }));
 
-function Panier({ cart }) {
+function Panier({ cart, longueur }) {
     const [panierData, setPanierData] = useState([]);
+    console.log(longueur);
+    console.log(panierData);
 
     // Mettre à jour les données du panier lorsqu'elles changent
     useEffect(() => {
@@ -27,7 +32,7 @@ console.log(panierData);
     return (
         <div>
             <IconButton aria-label="cart">
-                <StyledBadge badgeContent={panierData ? panierData.length : 0} color="secondary">
+                <StyledBadge badgeContent={panierData ? panierData.length : longueur}  color="secondary">
                     <ShoppingCartIcon />
                 </StyledBadge>
             </IconButton>

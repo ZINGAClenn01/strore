@@ -40,7 +40,6 @@ const navItems = ['Contact'];
 
 function NavbarDashboard
 (props) {
-  const { cart } = props;
   const {handleSignOut}= props
 
   const { window } = props;
@@ -54,7 +53,20 @@ function NavbarDashboard
   const handleChange = (event) => {
     setAge(event.target.value);
   };
+  const [cart, setCart] = useState([]);
 
+  useEffect(() => {
+    // Lire les données du localStorage
+    const storedCart = localStorage.getItem('cart');
+
+    // Vérifier si les données existent et les définir dans l'état
+    if (storedCart) {
+      setCart(JSON.parse(storedCart));
+    }
+  }, []);
+
+  const longueur = cart.length;
+  console.log('Longueur du panier :', longueur);
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
       <Typography variant="h6" sx={{ my: 2 }}>
@@ -213,7 +225,7 @@ function NavbarDashboard
           </Menu>
 
           <Link href="./PagePanier">
-            <Panier cart={cart} />
+            <Panier longueur={longueur} />
           </Link>
 
           <Box className='link-nav' sx={{ display: { xs: 'none', sm: 'block' } }}>

@@ -8,6 +8,9 @@ import Navbar from './Navbar';
 function PagePanier(props) {
   const { cart: propsCart } = props;
   const [cart, setCart] = useState(propsCart || []);
+  // const [ newPanier, setNewPanier ] = useState([])
+  const newPanier = cart
+  console.log(newPanier);
 
   // Utilisation de useEffect pour initialiser le panier à partir du local storage
   useEffect(() => {
@@ -27,10 +30,10 @@ function PagePanier(props) {
     // Mettre à jour le local storage après la suppression
     localStorage.setItem('cart', JSON.stringify(newCart));
   };
-
+console.log(cart);
   return (
     <>
-      <Navbar cartLength={cart.length} />
+      <Navbar cartLength={cart.length} newPanier={newPanier} />
       <Typography variant="h4" gutterBottom>
         Panier
       </Typography>

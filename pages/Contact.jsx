@@ -63,7 +63,7 @@ export default function MonFormulaire() {
       </div>
       
       <div class="formcarry-block">
-        <label htmlFor="fc-generated-1-message">Your message</label>
+        <label htmlFor="fc-generated-1-message">Votre message</label>
         <textarea name="message" id="fc-generated-1-message" placeholder="Entrer votre message..."  value={message}
         onChange={(e) => setMessage(e.target.value)}
         required></textarea>
