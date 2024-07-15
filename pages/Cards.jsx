@@ -15,12 +15,13 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from '../Firebase/Fibase';
 import Navbar from './Navbar'; // Import Navbar component
 import PagePanier from './PagePanier'; // Import PagePanier component
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from "react-responsive-carousel";
 
 export default function MediaCards() {
     const router = useRouter();
     const [chaussures, setChaussures] = useState([]);
     const [cart, setCart] = useState([]);
-    // console.log(cart);
 
     // Fonction pour ajouter un article au panier et stocker dans le local storage
     const addToCart = (id) => {
@@ -68,6 +69,54 @@ export default function MediaCards() {
 
     return (
         <div className='Cards'>
+            <div className='mt-[2%] max-h-[400px]'>
+                <Carousel
+                    showThumbs={false}
+                    showStatus={false}
+                    infiniteLoop
+                    autoPlay
+                    interval={3000}
+                    dynamicHeight
+                    stopOnHover
+                    showArrows={false} // Cette ligne supprime les boutons de contrôle
+                >
+                    <div className='max-h-[300px] overflow-hidden'>
+                        <img
+                            src="https://i.pinimg.com/736x/e3/24/90/e324906d9c8a3b0439753b2fc958f83c.jpg"
+                            alt="image1"
+                            className='h-full w-full'
+                        />
+                    </div>
+                    <div className='max-h-[300px] overflow-hidden'>
+                        <img
+                            src="https://i.pinimg.com/564x/33/1e/72/331e72e62230300546eb44f673c794e1.jpg"
+                            alt="image2"
+                            className='h-full w-full object-cover'
+                        />
+                    </div>
+                    <div className='max-h-[300px] overflow-hidden'>
+                        <img
+                            src="https://i.pinimg.com/236x/86/00/d6/8600d67c23bd6ff115aa7d13134b47d7.jpg"
+                            alt="image3"
+                            className='h-full object-cover'
+                        />
+                    </div>
+                    <div className='max-h-[300px] overflow-hidden'>
+                        <img
+                            src="https://media.geeksforgeeks.org/wp-content/uploads/20211213172227/4.png"
+                            alt="image4"
+                            className='h-full object-cover'
+                        />
+                    </div>
+                    <div className='max-h-[300px] overflow-hidden'>
+                        <img
+                            src="https://i.pinimg.com/236x/42/d6/2a/42d62ab3dc7af0549e241d945bfd35e0.jpg"
+                            alt="image5"
+                            className='h-full object-cover'
+                        />
+                    </div>
+                </Carousel>
+            </div>
             {chaussures.map(chaussure => (
                 <Card className='carte' key={chaussure.id} sx={{ maxWidth: 380 }}>
                     <CardMedia
@@ -82,7 +131,7 @@ export default function MediaCards() {
                         <Typography variant="body2" color="text.secondary">
                             {chaussure.plus}
                         </Typography>
-                        
+
                         <Grid className='price' item xs={8}>
                             <Item className='text-price'>{chaussure.pris + " Fcfa"}</Item>
                         </Grid>

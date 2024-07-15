@@ -11,7 +11,7 @@
 
 .carte{
   margin: auto;
-  margin-top: 2%;
+  margin-top: -2%;
   margin-bottom: 5%;
 }
 .boxform{
@@ -297,4 +297,24 @@ font-size: x-large;
 .h1dashboard{
   text-align: center;
   margin-top: -2%;
+}
+
+/* styles/globals.css ou un autre fichier CSS importé */
+.custom-control-arrow {
+  width: 2rem; /* ajustez la largeur selon vos besoins */
+  height: 2rem; /* ajustez la hauteur selon vos besoins */
+  background-size: contain; /* s'assurer que l'image de fond s'adapte au conteneur */
+}
+
+.custom-control-prev {
+  left: 1rem; /* ajustez la position à gauche selon vos besoins */
+}
+
+.custom-control-next {
+  right: 1rem; /* ajustez la position à droite selon vos besoins */
+}
+/* styles/globals.css */
+
+.carousel .control-dots, .carousel .control-prev.control-arrow, .carousel .control-next.control-arrow {
+  display: none !important;
 }
