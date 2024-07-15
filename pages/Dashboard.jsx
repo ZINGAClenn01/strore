@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { signOut } from 'firebase/auth';
 import { auth } from '../Firebase/Fibase'; // Assurez-vous que auth est correctement initialisé depuis Firebase
@@ -25,18 +25,18 @@ const Dashboard = () => {
     const [cart, setCart] = useState([]);
 
     useEffect(() => {
-      // Lire les données du localStorage
-      const storedCart = localStorage.getItem('cart');
-  
-      // Vérifier si les données existent et les définir dans l'état
-      if (storedCart) {
-        setCart(JSON.parse(storedCart));
-      }
+        // Lire les données du localStorage
+        const storedCart = localStorage.getItem('cart');
+
+        // Vérifier si les données existent et les définir dans l'état
+        if (storedCart) {
+            setCart(JSON.parse(storedCart));
+        }
     }, []);
-  
+
     const longueur = cart.length;
     console.log('Longueur du panier :', longueur);
-    
+
 
     return (
         <>
@@ -70,33 +70,38 @@ const Dashboard = () => {
                 </button>
                 </Link>
             </div>
+            <h1 className='pb-[8%] mt-[-1%] text-center font-bold text-2xl'>Votre Panier</h1>
+            <div className='grid grid-cols-3 gap-y-16  m-auto pb-10'>
+                
+                {cart.map((item, index) => (
+                    <div key={index} className="relative  m-auto flex w-80 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
+                        <div className="relative mx-4 -mt-6 h-40 overflow-hidden rounded-xl bg-blue-gray-500 bg-clip-border text-white shadow-lg shadow-blue-gray-500/40 bg-gradient-to-r from-blue-500 to-blue-600">
+                            <CardMedia
+                                sx={{ height: 180 }}
+                                image={item.image.toString()}
+                                title="Chaussure"
+                            />
+                        </div>
+                        <div className="p-6">
+                            <h5 className="mb-2 block font-sans text-xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
+                                {item.title}
+                            </h5>
+                            <p className="block font-sans text-base font-light leading-relaxed text-inherit antialiased">
+                                {item.plus}
+                            </p>
+                        </div>
+                        <div className="p-6 pt-0">
+                            <button data-ripple-light="true" type="button" className="select-none rounded-lg bg-blue-500 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+                                Lire plus
+                            </button>
+                        </div>
+                    </div>
+                ))}
+            </div>
+            <div>
+            <h1 className='pb-[8%] mt-[-1%] text-center font-bold text-2xl'>Nouveautés</h1>
 
-            <div className='mt-[4%] flex items-center justify-items-center space-x-[10%] flex-wrap'>
-            {cart.map((item, index) => (
-                <div key={index} className="relative flex w-80 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
-                    <div className="relative mx-4 -mt-6 h-40 overflow-hidden rounded-xl bg-blue-gray-500 bg-clip-border text-white shadow-lg shadow-blue-gray-500/40 bg-gradient-to-r from-blue-500 to-blue-600">
-                    <CardMedia
-                        sx={{ height: 180 }}
-                        image={item.image.toString()}
-                        title="Chaussure"
-                    />
-                    </div>
-                    <div className="p-6">
-                        <h5 className="mb-2 block font-sans text-xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
-                            {item.title}
-                        </h5>
-                        <p className="block font-sans text-base font-light leading-relaxed text-inherit antialiased">
-                            {item.plus}
-                        </p>
-                    </div>
-                    <div className="p-6 pt-0">
-                        <button data-ripple-light="true" type="button" className="select-none rounded-lg bg-blue-500 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
-                            Lire plus
-                        </button>
-                    </div>
-                </div>
-            ))}
-        </div>
+            </div>
 
         </>
     );

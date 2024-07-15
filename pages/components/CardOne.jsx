@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react';
 import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 import { db } from '../../Firebase/Fibase';
 import Navbar from '../Navbar';
+import NavbarDashboard from '../NavbarDashboard';
 
 function CardOne({ cart,addToCart }) {
     const router = useRouter();
@@ -58,9 +59,9 @@ function CardOne({ cart,addToCart }) {
 
     return (
         <div>
-            <Navbar />
+            <NavbarDashboard />
             {chaussures.map((chaussure) => (
-                <div key={chaussure.id}>
+                <div className='flex justify-center' key={chaussure.id}>
                     <Card sx={{ maxWidth: 380 }} onClick={() => handleItemClick(chaussure.id)}>
                         <CardMedia
                             sx={{ height: 300 }}
